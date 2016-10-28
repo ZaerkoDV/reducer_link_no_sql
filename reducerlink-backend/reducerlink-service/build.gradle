@@ -26,7 +26,7 @@ allprojects {
 
 dependencies {
     compile project(':reducerlink-dao')
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.4.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-velocity', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: springBootVersion
