@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = UserPhoto.COLLECTION_NAME)
 public class UserPhoto extends BaseEntity<Long> {
     public static final String COLLECTION_NAME = "user_photo";
-	
-	@Id
+
+    @Id
     private Long id;
 
     private Long createdAtTimestamp;
@@ -16,9 +16,9 @@ public class UserPhoto extends BaseEntity<Long> {
     private byte[] photoData;
 
     @DBRef
-	private User user;
+    private User user;
 
-	@Override
+    @Override
     public Long getId() {
         return id;
     }

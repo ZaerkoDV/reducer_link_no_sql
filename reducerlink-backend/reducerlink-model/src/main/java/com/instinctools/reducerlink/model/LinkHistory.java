@@ -6,19 +6,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = LinkHistory.COLLECTION_NAME)
 public class LinkHistory extends BaseEntity<Long> {
-	public static final String COLLECTION_NAME = "link_history";
+    public static final String COLLECTION_NAME = "link_history";
 
-	@Id
+    @Id
     private Long id;
 
-	private Long createdAtTimestamp;
+    private Long createdAtTimestamp;
 
-	private Long sumClick;
+    private Long sumClick;
 
-	@DBRef
-	private Link link;
-	
-	@Override
+    @DBRef
+    private Link link;
+
+    @Override
     public Long getId() {
         return id;
     }
@@ -53,5 +53,5 @@ public class LinkHistory extends BaseEntity<Long> {
     public LinkHistory setLink(Link link) {
         this.link = link;
         return this;
-    }    
+    }
 }

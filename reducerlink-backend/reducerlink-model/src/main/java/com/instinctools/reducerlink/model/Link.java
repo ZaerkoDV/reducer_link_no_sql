@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = Link.COLLECTION_NAME)
 public class Link extends BaseEntity<Long> {
     public static final String COLLECTION_NAME = "link";
-	
-	@Id
+
+    @Id
     private Long id;
 
     private String tag;

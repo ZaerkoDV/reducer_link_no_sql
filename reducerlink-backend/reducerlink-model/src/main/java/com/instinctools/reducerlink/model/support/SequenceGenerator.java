@@ -7,8 +7,8 @@ public class SequenceGenerator {
     public static final String COLLECTION_NAME = "sequence_generator";
 
     @Id
-	private String id;
-	private Long sequence;
+    private String id;
+    private Long sequence;
 
     public SequenceGenerator() {
     }

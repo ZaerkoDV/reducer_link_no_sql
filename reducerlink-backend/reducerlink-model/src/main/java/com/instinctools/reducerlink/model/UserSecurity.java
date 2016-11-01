@@ -6,12 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = UserSecurity.COLLECTION_NAME)
 public class UserSecurity extends BaseEntity<Long> {
-	public static final String COLLECTION_NAME = "user_security";
-	
-	@Id
+    public static final String COLLECTION_NAME = "user_security";
+
+    @Id
     private Long id;
-	
-	private String login;
+
+    private String login;
 
     private String password;
 
@@ -21,7 +21,7 @@ public class UserSecurity extends BaseEntity<Long> {
 
     @DBRef
     private User user;
-    
+
     @Override
     public Long getId() {
         return id;

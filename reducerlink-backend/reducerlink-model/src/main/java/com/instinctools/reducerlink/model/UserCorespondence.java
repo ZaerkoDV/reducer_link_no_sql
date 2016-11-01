@@ -7,10 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = UserCorespondence.COLLECTION_NAME)
 public class UserCorespondence extends BaseEntity<Long> {
     public static final String COLLECTION_NAME = "user_corespondence";
-	
-	@Id
+
+    @Id
     private Long id;
-	
+
     private String email;
 
     private String skype;
@@ -21,7 +21,7 @@ public class UserCorespondence extends BaseEntity<Long> {
 
     @DBRef
     private User user;
-    
+
     @Override
     public Long getId() {
         return id;

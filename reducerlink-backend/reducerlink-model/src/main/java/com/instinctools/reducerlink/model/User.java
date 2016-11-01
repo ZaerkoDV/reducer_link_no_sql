@@ -6,12 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = User.COLLECTION_NAME)
 public class User extends BaseEntity<Long> {
-	public static final String COLLECTION_NAME = "user";
-	
-	@Id
+   public static final String COLLECTION_NAME = "user";
+
+    @Id
     private Long id;
-	
-	private String firstName;
+
+    private String firstName;
 
     private String lastName;
 
@@ -20,7 +20,7 @@ public class User extends BaseEntity<Long> {
     private Long birth;
 
     private String status;
-	
+
     @Override
     public Long getId() {
         return id;
