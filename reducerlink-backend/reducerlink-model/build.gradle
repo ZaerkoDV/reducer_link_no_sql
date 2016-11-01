@@ -26,4 +26,5 @@ allprojects {
 
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '1.4.0.RELEASE'
+    compile group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb', version: '5.0.2.Final'
 }

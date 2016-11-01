@@ -1,0 +1,92 @@
+extends ../partials/layout
+
+block layoutBody
+    div(ng-controller="UserController" ng-init="loadUserProfile()")
+        a(ui-sref="user-profile-edit" ui-sref-opts="{reload: true}")
+            .navbar.navbar-default.navbar-static-top
+                .container-fluid
+                    ul.nav.navbar-header
+                        .span.navbar-brand Bear Shop Market
+                    ul.nav.navbar-nav.navbar-right
+                        .span.navbar-brand
+                            a(ng-click="logout()")
+                                span.glyphicon.glyphicon-log-out Logout &nbsp
+            .container-fluid
+                .row
+                    .col-md-2
+                        ui(class="nav nav-pills nav-stacked")
+                            li
+                                .panel.panel
+                                    .panel-heading
+                                        h4.panel-title
+                                           a(data-toggle="collapse" ng-click="redirectToUserLinkList()" data-target="#collapseUserLinkList") Link List
+                             li
+                                .panel.panel
+                                    .panel-heading
+                                        h4.panel-title
+                                           a(data-toggle="collapse" ng-click="reditectToLinkEdit()" data-target="#collapseNewLink") New Link
+                    .col-md-10
+                        form.form-horizontal(name="profileForm" novalidate)
+                            .fieldset
+                                .form-group.has-success
+                                    .col-lg-8
+                                        table.table-hover
+                                            tr
+                                                td
+                                                    img(ng-src="{{userPhoto.path}}" height="200px" width="200px")
+                                                    a.span.glyphicon.glyphicon-remove(ng-click="deletePhotoById(userPhoto.id)" style="position: absolute; top: 0;")
+                                            tr
+                                                td(style="min-width: 200px; text-align: center;")  {{ userPhoto.name }}
+                                .form-group.has-success
+                                    .col-lg-8
+                                        label(class="btn btn-primary")
+                                            input(type="file" id="photo" style="display: none;" onchange="angular.element(this).scope().updateUserPhoto()") 
+                                            | Browse&hellip;
+                                .form-group.has-success(ng-class="{ 'has-error' : profileForm.userSecurity.user.firstName.$invalid && !profileForm.userSecurity.user.firstName.$pristine }")
+                                    label.col-lg-2.control-label(for="firstName") First Name
+                                    div.col-lg-5
+                                        input.form-control(type="text" name="firstName" ng-model="userSecurity.user.firstName" ng-minlength="1" ng-maxlength="15"
+                                        onkeypress="return !(event.charCode >= 47 && event.charCode <= 57)" placeholder="Enter First Name")
+                                        p.help-block(ng-show="profileForm.userSecurity.user.firstName.$error.minlength") First name is too short.
+                                        p.help-block(ng-show="profileForm.userSecurity.user.firstName.$error.maxlength") First Name is too long.
+                                
+                                .form-group.has-success(ng-class="{ 'has-error' : profileForm.userSecurity.user.lastName.$invalid && !profileForm.userSecurity.user.lastName.$pristine }")
+                                    label.col-lg-2.control-label(for="lastName") Last Name
+                                    div.col-lg-5
+                                        input.form-control(type="text" name="lastName" ng-model="userSecurity.user.lastName" ng-minlength="1" ng-maxlength="15"
+                                        onkeypress="return !(event.charCode >= 47 && event.charCode <= 57)" placeholder="Enter Last Name")
+                                        p.help-block(ng-show="profileForm.userSecurity.user.lastName.$error.minlength") Last name is too short.
+                                        p.help-block(ng-show="profileForm.userSecurity.user.lastName.$error.maxlength") Last Name is too long.
+                               
+                               .form-group.has-success(ng-class="{ 'has-error' : profileForm.userSecurity.user.middleName.$invalid && !profileForm.userSecurity.user.middleName.$pristine }")
+                                    label.col-lg-2.control-label(for="middleName") Middle Name
+                                    div.col-lg-5
+                                        input.form-control(type="text" name="middleName" ng-model="userSecurity.user.middleName" ng-maxlength="15"
+                                        onkeypress="return !(event.charCode >= 47 && event.charCode <= 57)" placeholder="Enter Middle Name")
+                                        p.help-block(ng-show="profileForm.userSecurity.user.middleName.$error.maxlength") Last Name is too long.
+                                .form-group.has-success
+                                    label.col-lg-2.control-label(for="birth") Birth
+                                    div.col-lg-2
+                                        input.form-control.input-md(type="date" date-parser="DD/MM/YYYY" ng-model="dateOfBirth" aria-describedby="sizing-addon3")
+                                    //-.form-group.has-success
+                                    //-    label.col-lg-2.control-label(for="birth") Birth
+                                    //-    div.col-lg-9
+                                    //-        div.input-group
+                                    //-           input.form-control(type="text" uib-datepicker-popup ng-model="userSecurity.user.birth"
+                                    //-            is-open="popup1.opened" datepicker-options="dateOptions" ng-required="false")
+                                    //-            span.input-group-btn
+                                    //-                button.btn.btn-large.btn-primary(ng-click="open1()")
+                                    //-                    i.glyphicon.glyphicon-calendar
+                                .form-group(style="margin-top: 5px;")
+                                        .col-md-offset-5.col-md-2
+                                            button.btn.btn-md.btn-primary.btn-block(type="submit", ng-click="updateUserProfile()") Update
+
+
+
+
+
+
+
+
+
+

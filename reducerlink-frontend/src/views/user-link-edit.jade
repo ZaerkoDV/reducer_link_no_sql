@@ -1,0 +1,57 @@
+extends ../partials/layout
+
+block layoutBody
+    div(ng-controller="UserController" ng-init="loadLinkForEdit()")
+        a(ui-sref="user-link-edit") 
+            .navbar.navbar-default.navbar-static-top(style="overflow-x: hidden;")
+                .container-fluid
+                    ul.nav.navbar-header
+                        .span.navbar-brand Reducer Link
+                    ul.nav.navbar-nav.navbar-right
+                        .span.navbar-brand
+                            a(ng-click="logout()")
+                                span.glyphicon.glyphicon-log-out Logout &nbsp
+            .container-fluid
+                .row
+                    .col-md-2
+                        ui(class="nav nav-pills nav-stacked")
+                            li
+                                .panel.panel
+                                    .panel-heading
+                                        h4.panel-title
+                                           a(data-toggle="collapse" ng-click="redirectToUserLinkList()" data-target="#collapseLinkList") Link List
+                            li
+                                .panel.panel
+                                    .panel-heading
+                                        h4.panel-title
+                                           a(data-toggle="collapse" ng-click="redirectToEditProfile()" data-target="#collapseEditProfile") Edit Profile
+                    .col-md-10
+                        form.form-horizontal(name="linkForm" novalidate)
+                             .fieldset
+                                .form-group.has-success(ng-class="{ 'has-error' : linkForm.link.tag.$invalid && !linkForm.link.tag.$pristine }")
+                                    .col-md-6.col-xs-12
+                                        label.control-label.col-lg-2(for="tag") Tag
+                                        .col-lg-8
+                                            input.form-control(type="text" name="tag" ng-model="link.tag" ng-minlength="1" ng-maxlength="10" placeholder="Enter valid tag")
+                                            p.help-block(ng-show="linkForm.link.tag.$invalid && !linkForm.link.tag.$pristine") Enter a valid tag
+                                            p.help-block(ng-show="linkForm.link.tag.$error.minlength") Tag is too short.
+                                            p.help-block(ng-show="linkForm.link.tag.$error.maxlength") Tag is too long.
+                                .form-group.has-success(ng-class="{ 'has-error' : linkForm.link.fullUrl.$invalid && !linkForm.link.fullUrl.$pristine }")
+                                    .col-md-6.col-xs-12
+                                        label.control-label.col-lg-2(for="fullUrl") Full Url
+                                        .col-lg-8
+                                            input.form-control(type="text" name="fullUrl" ng-model="link.fullUrl" ng-minlength="5" placeholder="Enter valid fullUrl")
+                                            p.help-block(ng-show="linkForm.link.fullUrl.$invalid && !linkForm.link.fullUrl.$pristine") Enter a valid urlFull.
+                                            p.help-block(ng-show="linkForm.link.fullUrl.$error.minlength") Teaser is too short.
+
+                                .form-group.has-success(ng-class="{ 'has-error' : linkForm.link.comment.$invalid && !linkForm.link.comment.$pristine }")
+                                    .col-md-6.col-xs-12
+                                        label.control-label.col-lg-2(for="comment") Comment
+                                        .col-lg-8
+                                            textarea(type="text", rows="5", cols="65", name="comment" ng-maxlength="200" ng-model="link.comment" placeholder="Enter valid comment")
+                                            p.help-block(ng-show="linkForm.link.comment.$error.maxlength") Comment is too long.
+
+                                 .form-group(style="margin-top: 5px;")
+                                        .col-md-offset-9.col-md-2()
+                                                button.btn.btn-primary.btn-block(type="submit", ng-show="link.id==undefined" ng-click="createLink()") Save
+                                                button.btn.btn-primary.btn-block(type="submit", ng-show="link.id!=undefined" ng-click="updateLink()") Update
