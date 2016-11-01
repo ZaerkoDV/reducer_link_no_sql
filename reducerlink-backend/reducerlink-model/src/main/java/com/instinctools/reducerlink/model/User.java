@@ -3,7 +3,6 @@ package com.instinctools.reducerlink.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
 @Document(collection = User.COLLECTION_NAME)
 public class User extends BaseEntity<Long> {
    public static final String COLLECTION_NAME = "user";
