@@ -20,7 +20,6 @@ public class User extends BaseEntity<Long> {
 
     private String status;
 
-    @Override
     public Long getId() {
         return id;
     }

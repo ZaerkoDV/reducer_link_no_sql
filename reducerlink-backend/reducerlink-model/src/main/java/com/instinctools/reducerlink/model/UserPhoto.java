@@ -18,7 +18,6 @@ public class UserPhoto extends BaseEntity<Long> {
     @DBRef
     private User user;
 
-    @Override
     public Long getId() {
         return id;
     }

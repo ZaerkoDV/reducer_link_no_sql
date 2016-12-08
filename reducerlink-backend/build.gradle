@@ -14,7 +14,7 @@ buildscript {
         classpath files('liquibase-lib/liquibase-3.4.2.jar')
         classpath files('liquibase-lib/liquibase-groovy-dsl-1.2.1.jar')
         classpath files('liquibase-lib/liquibase-gradle-plugin-1.2.1.jar')
-        classpath group: 'org.mongodb', name: 'mongo-java-driver', version: '3.2.0-rc0'
+        classpath group: 'org.mongodb', name: 'mongo-java-driver', version: '3.3.0'
         classpath group: 'org.akhikhl.gretty', name: 'gretty', version: grettyVersion
     }
 }

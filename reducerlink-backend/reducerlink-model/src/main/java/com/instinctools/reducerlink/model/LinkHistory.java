@@ -18,7 +18,6 @@ public class LinkHistory extends BaseEntity<Long> {
     @DBRef
     private Link link;
 
-    @Override
     public Long getId() {
         return id;
     }

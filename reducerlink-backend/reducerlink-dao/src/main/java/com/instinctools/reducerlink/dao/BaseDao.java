@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-public interface BaseDao<T, ID extends Serializable> {
+public interface BaseDao <T, ID extends Serializable> {
     public <S extends T> S save(S entity);
     public <S extends T> List<S> save(Iterable<S> entities);
     public T findOne(ID id);

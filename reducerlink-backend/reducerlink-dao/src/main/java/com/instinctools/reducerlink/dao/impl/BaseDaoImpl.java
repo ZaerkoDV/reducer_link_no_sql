@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -77,7 +77,6 @@ public class BaseDaoImpl<T, ID extends Serializable> implements MongoRepository<
     }
     
     public void delete(ID id) {
-        //mongoOperations.remove(Query.query(Criteria.where("id").is(id)), entityInformation.getJavaType(), entityInformation.getCollectionName());
         mongoOperations.remove(createCriteria(Criteria.where("id").is(id)), entityInformation.getJavaType(), entityInformation.getCollectionName());
     }
 
@@ -152,7 +151,7 @@ public class BaseDaoImpl<T, ID extends Serializable> implements MongoRepository<
     }
 
     @SuppressWarnings("hiding")
-    private <T> List<T> convertIterableToList(Iterable<T> entities) {
+    public <T> List<T> convertIterableToList(Iterable<T> entities) {
 
         if (entities instanceof List) {
             return (List<T>) entities;
@@ -175,4 +174,39 @@ public class BaseDaoImpl<T, ID extends Serializable> implements MongoRepository<
     private int tryDetermineRealSizeOrReturn(Iterable<?> iterable, int defaultSize) {
         return iterable == null ? 0 : (iterable instanceof Collection) ? ((Collection<?>) iterable).size() : defaultSize;
     }
+
+//    @Override
+//	public <S extends T> S findOne(Example<S> example) {
+//		Query q = new Query(new Criteria().alike(example));
+//		return mongoOperations.findOne(q, example.getProbeType(), entityInformation.getCollectionName());
+//	}
+//
+//    @Override
+//	public <S extends T> long count(Example<S> example) {
+//		Query q = new Query(new Criteria().alike(example));
+//		return mongoOperations.count(q, example.getProbeType(), entityInformation.getCollectionName());
+//	}
+//
+//    @Override
+//	public <S extends T> boolean exists(Example<S> example) {
+//		Query q = new Query(new Criteria().alike(example));
+//		return mongoOperations.exists(q, example.getProbeType(), entityInformation.getCollectionName());
+//	}
+//	
+//	@Override
+//	public <S extends T> List<S> findAll(Example<S> example) {
+//		return findAll(example, (Sort) null);
+//	}
+//
+//	@Override
+//	public <S extends T> List<S> findAll(Example<S> example, Sort sort) {
+//		Query q = new Query(new Criteria().alike(example));
+//
+//		if (sort != null) {
+//			q.with(sort);
+//		}
+//
+//		return mongoOperations.find(q, example.getProbeType(), entityInformation.getCollectionName());
+//	}
+
 }

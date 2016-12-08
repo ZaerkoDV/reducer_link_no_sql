@@ -22,7 +22,6 @@ public class Link extends BaseEntity<Long> {
     @DBRef
     private User user;
 
-    @Override
     public Long getId() {
         return id;
     }
