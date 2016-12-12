@@ -1,15 +1,16 @@
 package com.instinctools.reducerlink.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = Link.COLLECTION_NAME)
-public class Link extends BaseEntity<Long> {
+public class Link extends BaseEntity<ObjectId> {
     public static final String COLLECTION_NAME = "link";
 
     @Id
-    private Long id;
+    private ObjectId id;
 
     private String tag;
 
@@ -22,11 +23,11 @@ public class Link extends BaseEntity<Long> {
     @DBRef
     private User user;
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public Link setId(Long id) {
+    public Link setId(ObjectId id) {
         this.id = id;
         return this;
     }

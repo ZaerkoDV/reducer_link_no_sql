@@ -1,14 +1,15 @@
 package com.instinctools.reducerlink.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = User.COLLECTION_NAME)
-public class User extends BaseEntity<Long> {
+public class User extends BaseEntity<ObjectId> {
     public static final String COLLECTION_NAME = "user";
 
     @Id
-    private Long id;
+    private ObjectId id;
 
     private String firstName;
 
@@ -20,11 +21,11 @@ public class User extends BaseEntity<Long> {
 
     private String status;
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public User setId(Long id) {
+    public User setId(ObjectId id) {
         this.id = id;
         return this;
     }
