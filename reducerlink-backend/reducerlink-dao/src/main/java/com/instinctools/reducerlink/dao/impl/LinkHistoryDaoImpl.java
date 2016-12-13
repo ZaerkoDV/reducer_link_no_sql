@@ -1,7 +1,6 @@
 package com.instinctools.reducerlink.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -72,8 +71,6 @@ public class LinkHistoryDaoImpl extends BaseDaoImpl<LinkHistory, ObjectId> imple
             for (LinkHistory linkHistory : listLinkHistory) {
                 listLink.add(linkHistory.getLink());
             }
-        }else {
-            listLink = Collections.emptyList();
         }
 
         return listLink;
