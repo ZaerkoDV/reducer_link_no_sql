@@ -3,7 +3,6 @@ package com.instinctools.reducerlink.dao.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
@@ -49,7 +48,7 @@ public class UserDaoImpl extends BaseDaoImpl<User, ObjectId> implements UserDao 
     }
 
     public long countTotalUser() {
-        return super.count(null);
+        return super.count();
     }
 
     public List<User> getListUserWithStatus(User inputUser, String orderBy, boolean orderAsc, int pageNum, int pageSize) {
@@ -58,7 +57,7 @@ public class UserDaoImpl extends BaseDaoImpl<User, ObjectId> implements UserDao 
         );
 
         if (orderAsc) {
-            query.with(new Sort(new Order(Direction.ASC, MAP_ORDER_BY.get(orderBy))));//.ignoreCase()
+            query.with(new Sort(new Order(Direction.ASC, MAP_ORDER_BY.get(orderBy))));
         } else {
             query.with(new Sort(new Order(Direction.DESC, MAP_ORDER_BY.get(orderBy))));
         }

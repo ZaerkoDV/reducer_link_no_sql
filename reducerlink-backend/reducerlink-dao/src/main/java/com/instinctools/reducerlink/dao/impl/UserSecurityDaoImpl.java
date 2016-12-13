@@ -16,8 +16,7 @@ public class UserSecurityDaoImpl extends BaseDaoImpl<UserSecurity, ObjectId> imp
 
     public User getUserByLoginPassword(String login, String password) {
         Query query = super.createCriteria(
-            Criteria.where("login").is(login).andOperator(
-            Criteria.where("password").is(password))
+            Criteria.where("login").is(login).and("password").is(password)
         );
         query.fields().include("user");
 
@@ -38,19 +37,11 @@ public class UserSecurityDaoImpl extends BaseDaoImpl<UserSecurity, ObjectId> imp
         return super.executeQuery(query).toString();
     }
 
-    @SuppressWarnings("")
     public String getUserRole(ObjectId idUser) {
-        Query query = super.createCriteria(Criteria.where("id").in("user").is(idUser));
+        Query query = super.createCriteria(Criteria.where("user.id").is(idUser));
         query.fields().include("role");
 
         return super.executeQuery(query).toString();
-
-//        Criteria criteria = createCriteria()
-//                .createAlias("user", "u")
-//                .add(Restrictions.eq("u.id", idUser))
-//                .setProjection(Projections.property("role"));
-//
-//            return (String) criteria.uniqueResult();
     }
 
     public Boolean isLoginExist(String login) {

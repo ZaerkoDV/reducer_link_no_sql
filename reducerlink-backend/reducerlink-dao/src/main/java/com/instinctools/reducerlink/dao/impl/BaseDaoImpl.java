@@ -22,26 +22,30 @@ public class BaseDaoImpl<T, ID extends Serializable> {
     public Query createCriteria(Criteria criteria) {
         return Query.query(new Criteria()).addCriteria(criteria);
     }
+    
+    public Query createQuery() {
+        return new Query();
+    }
 
     public List<T> executeQuery(Query query) {
         return mongoTemplate.find(query, domainClass);
     }
     
-    public List<T> getCollection(String collection, String field){
-        return mongoTemplate.getCollection(collection).distinct(field);
-    }
-    
     public T findOne(ObjectId id) {
         return mongoTemplate.findOne(createCriteria(Criteria.where("id").is(id)), domainClass);
+    }
+    
+    public T findOne(Query query) {
+        return mongoTemplate.findOne(query, domainClass);
+    }
+    
+    public List<T> findAll() {
+        return mongoTemplate.findAll(domainClass);
     }
 
     public T save(T object) {
         mongoTemplate.save(object);
         return object;
-    }
-
-    public List<T> findAll() {
-        return mongoTemplate.findAll(domainClass);
     }
 
     public long count() {

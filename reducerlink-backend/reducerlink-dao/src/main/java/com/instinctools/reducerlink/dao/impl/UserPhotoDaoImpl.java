@@ -13,19 +13,17 @@ public class UserPhotoDaoImpl extends BaseDaoImpl<UserPhoto, ObjectId> implement
        super(UserPhoto.class);
     }
 
-    @SuppressWarnings("")
     public UserPhoto getUserPhotoByIdUser(ObjectId idUser) {
         Query query = super.createCriteria(
-            Criteria.where("id").in("user").is(idUser)
+            Criteria.where("user.id").is(idUser)
         );
 
         return (UserPhoto) super.executeQuery(query);
     }
 
-    @SuppressWarnings("")
     public ObjectId getIdUserPhotoByIdUser(ObjectId idUser) {
         Query query = super.createCriteria(
-            Criteria.where("id").in("user").is(idUser)
+            Criteria.where("user.id").is(idUser)
         );
         query.fields().include("id");
 

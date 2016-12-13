@@ -22,25 +22,11 @@ public class UserCorespondenceDaoImpl extends BaseDaoImpl<UserCorespondence, Obj
         return null;
     }
 
-    @SuppressWarnings("")
     public List<UserCorespondence> getListUserCorespondencesByIdUser(ObjectId idUser) {
-        Query query = super.createCriteria(Criteria.where("id").in("user").is(idUser));
-        query.with(new Sort(new Order(Direction.ASC,"id")));
+        Query query = super.createCriteria(Criteria.where("user.id").is(idUser));
+        query.with(new Sort(new Order(Direction.ASC, "id")));
 
         return super.executeQuery(query);
-//    Criteria criteria = createCriteria()
-//                .createAlias("user", "u")
-//                .add(Restrictions.eq("u.id", idUser))
-//                .addOrder(Order.asc("u.id"));
-//            return criteria.list();
-    }
-
-    @SuppressWarnings("")
-    public List<String> getListEmailByIdUser(ObjectId idUser) {
-        Query query = super.createCriteria(Criteria.where("id").in("user").is(idUser));
-        query.fields().include("email");
-        
-        return null;//super.executeQuery(query);
     }
 
     public Boolean isEmailExist(String email) {
@@ -54,18 +40,16 @@ public class UserCorespondenceDaoImpl extends BaseDaoImpl<UserCorespondence, Obj
             Criteria.where("skype").is(skype)
         )).isEmpty();
     }
-    
+
     public Boolean isPhoneExist(String phone) {
         return !super.executeQuery(createCriteria(
             Criteria.where("phone").is(phone)
         )).isEmpty();
     }
 
-    @SuppressWarnings("")
     public Boolean isUserIpAddress(ObjectId idUser, String ipAddress) {
         return super.executeQuery(createCriteria(
-            Criteria.where("ipAddress").is(ipAddress).andOperator(
-            Criteria.where("id").in("user").is(idUser))
-        )).isEmpty();
+            Criteria.where("ipAddress").is(ipAddress).and("user.id").is(idUser))
+        ).isEmpty();
     }
 }

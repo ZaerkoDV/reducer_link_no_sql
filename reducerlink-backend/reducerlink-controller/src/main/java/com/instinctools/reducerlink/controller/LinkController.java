@@ -160,8 +160,8 @@ public class LinkController extends BaseController {
     }
 
     @RequestMapping(value = "/numberLinkVisits/increase", method = RequestMethod.POST)
-    public boolean actionPostLinkNumberLinkVisitsIncrease(@RequestBody Map<String, Object> request) {
+    public ResponseEntity<?> actionPostLinkNumberLinkVisitsIncrease(@RequestBody Map<String, Object> request) {
         linkService.increaseNumberLinkVisits(ObjUtils.asObjectId(request, "id"));
-        return true;
+        return buildOk(true);
     }
 }
