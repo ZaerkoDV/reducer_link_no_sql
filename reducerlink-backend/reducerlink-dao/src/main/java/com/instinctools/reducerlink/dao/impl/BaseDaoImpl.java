@@ -38,7 +38,7 @@ public class BaseDaoImpl<T, ID extends Serializable> {
     public T findOne(Query query) {
         return mongoTemplate.findOne(query, domainClass);
     }
-    
+
     public List<T> findAll() {
         return mongoTemplate.findAll(domainClass);
     }

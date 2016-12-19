@@ -1,14 +1,15 @@
 package com.instinctools.reducerlink.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,9 @@ import com.instinctools.reducerlink.model.LinkHistory;
 @Repository
 public class LinkHistoryDaoImpl extends BaseDaoImpl<LinkHistory, ObjectId> implements LinkHistoryDao {
     private static final Map<String, String> MAP_ORDER_BY;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public LinkHistoryDaoImpl() {
         super(LinkHistory.class);
@@ -76,10 +80,12 @@ public class LinkHistoryDaoImpl extends BaseDaoImpl<LinkHistory, ObjectId> imple
         return listLink;
     }
 
-    @SuppressWarnings("")
     public List<LinkHistory> getListLinkByIdUser(ObjectId idUser, String orderBy, boolean orderAsc, int pageNum, int pageSize) {
-        Query query = createCriteria(Criteria.where("link.user.id").is(idUser));
-        
+        //Query query = createCriteria(Criteria.where("link.user.id").is(idUser));
+
+        Link link = mongoTemplate.findOne(new Query().addCriteria(Criteria.where("user.id").is(idUser)), Link.class);
+        Query query = createCriteria(Criteria.where("link.id").is(link.getId()));
+
         if (orderAsc) {
              query.with(new Sort(new Order(Direction.ASC, MAP_ORDER_BY.get(orderBy))));
         } else {
@@ -91,16 +97,25 @@ public class LinkHistoryDaoImpl extends BaseDaoImpl<LinkHistory, ObjectId> imple
             .limit(pageSize)
         );
     }
-    @SuppressWarnings("")
-    public List<LinkHistory> getListLinkByTag(String tag, String orderBy, boolean orderAsc) {
-       Query query = createCriteria(Criteria.where("link.tag").is(tag));
 
-       if (orderAsc) {
-            query.with(new Sort(new Order(Direction.ASC, MAP_ORDER_BY.get(orderBy))));
-       } else {
-            query.with(new Sort(new Order(Direction.DESC, MAP_ORDER_BY.get(orderBy))));
+    public List<LinkHistory> getListLinkByTag(String tag, String orderBy, boolean orderAsc) {
+//       Query query = createCriteria(Criteria.where("link.tag").is(tag));
+//
+//       if (orderAsc) {
+//            query.with(new Sort(new Order(Direction.ASC, MAP_ORDER_BY.get(orderBy))));
+//       } else {
+//            query.with(new Sort(new Order(Direction.DESC, MAP_ORDER_BY.get(orderBy))));
+//       }
+//       
+//       return super.executeQuery(query);
+       List<LinkHistory> linkHistoryList = new ArrayList<LinkHistory>();
+
+       for (LinkHistory linkHistory : super.findAll()) {
+           if(linkHistory.getLink().getTag().equals(tag)) {
+               linkHistoryList.add(linkHistory);
+           }
        }
 
-       return super.executeQuery(query);
+       return linkHistoryList;
     }
 }
