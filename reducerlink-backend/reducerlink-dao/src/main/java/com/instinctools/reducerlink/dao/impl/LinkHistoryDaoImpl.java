@@ -81,7 +81,7 @@ public class LinkHistoryDaoImpl extends BaseDaoImpl<LinkHistory, ObjectId> imple
     }
 
     public List<LinkHistory> getListLinkByIdUser(ObjectId idUser, String orderBy, boolean orderAsc, int pageNum, int pageSize) {
-        //Query query = createCriteria(Criteria.where("link.user.id").is(idUser));
+//      Query query = createCriteria(Criteria.where("link.user.id").is(idUser));
 
         Link link = mongoTemplate.findOne(new Query().addCriteria(Criteria.where("user.id").is(idUser)), Link.class);
         Query query = createCriteria(Criteria.where("link.id").is(link.getId()));
