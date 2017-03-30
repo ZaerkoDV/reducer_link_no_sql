@@ -1,0 +1,5 @@
+собираем фронт npm i
+Запускаем на 8082
+   npm i
+   npm run gulp
+   gulp watch
